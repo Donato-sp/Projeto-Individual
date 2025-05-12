@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/Front-end/style_cadastro.css">
+</head>
+
+<main class="container">
+
+    <video class="video" autoplay muted loop>
+        <source src="seu-video.mp4" type="video/mp4">
+    </video>
+
+    <form class="form-cadastro" onsubmit="registrar(); return false;">
+
+        <div class="campo">
+            <p>Nome completo:</p>
+            <input type="text" id="input_name" placeholder="Digite aqui..." class="input-text">
+        </div>
+
+        <div class="campo">
+            <p>E-mail:</p>
+            <input type="text" id="input_email" placeholder="exemplo@exemplo.com" class="input-text"
+                oninput="validarEmail()">
+            <div id="msg_email" class="mensagem"></div>
+        </div>
+
+        <div class="campo">
+            <p>Senha:</p>
+            <input type="password" id="input_senha" placeholder="******" class="input-text" oninput="verificarSenha()">
+            <div id="msg_senha" class="mensagem"></div>
+        </div>
+
+        <div class="campo">
+            <p>Confirmar senha:</p>
+            <input type="password" id="input_confSenha" placeholder="******" class="input-text" oninput="senhaConf()">
+            <div id="msg_confSenha" class="mensagem"></div>
+        </div>
+
+            <button type="submit" class="botao">Cadastrar</button>
+
+    </form>
+
+    <p class="link-login">Já é um piloto? <a href="login.html">Fazer login</a></p>
+</main>
+
+</body>
+
+
+</html>
+
+<script>
+
+    function verificarSenha() {
+        var senha = document.getElementById('nput_senha').value;
+        var num = '0123456789';
+        var carEsp = '!@#$%&*().';
+        var verificar_caracter_esp = 0;
+        var verificar_numero = 0;
+        var mensagem = ``;
+
+        if (senha.length >= 8) {
+            mensagem += `<span style="color: green;">Ter 8 ou mais caracteres</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Ter 8 ou mais caracteres</span> <br>`;
+        }
+
+        if (senha != senha.toLowerCase()) {
+            mensagem += `<span style="color: green;">Conter pelo menos 1 caratere maiúsculo</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Conter pelo menos 1 caratere maiúsculo</span> <br>`;
+        }
+
+        for (var j = 0; j < senha.length; j++) {
+            if (carEsp.includes(senha[j])) {
+                verificar_caracter_esp = 1;
+                j = (senha.length) - 1;
+            } else {
+                verificar_caracter_esp = 0;
+            }
+        }
+
+        if (verificar_caracter_esp == 1) {
+            mensagem += `<span style="color: green;">Conter pelo menos 1 caractere especial</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Conter pelo menos 1 caractere especial</span> <br>`;
+        }
+
+        for (var i = 0; i < senha.length; i++) {
+            if (num.includes(senha[i])) {
+                verificar_numero = 1;
+                i = (senha.length) - 1;
+            } else {
+                verificar_numero = 0;
+            }
+        }
+
+        if (senha.includes(' ')) {
+            mensagem += `<span style="color: red;">Não pode conter espaços</span> <br>`;
+        }
+
+        if (verificar_numero == 1) {
+            mensagem += `<span style="color: green;">Conter pelo menos 1 número</span> <br>`;
+        } else {
+            mensagem += `<span style="color: red;">Conter pelo menos 1 número</span> <br>`;
+        }
+
+        msg.innerHTML = mensagem;
+    }
+
+    function senhaConf() {
+        var senha = document.getElementById('input_senha').value;
+        var confSenha = document.getElementById('input_confSenha').value;
+        var mensagem = ``
+
+        if (senha != confSenha) {
+            mensagem = `<span style="color: red;">As senhas devem ser iguais</span> <br>`;
+        }
+
+        document.getElementById('msg').innerHTML = mensagem;
+    }
+
+    function validarEmail() {
+        var email = document.getElementById('input_email').value;
+
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!regex.test(email)) {
+            msg.innerHTML = `<span style="color: red;">E-mail inválido</span>`;
+        } else {
+            msg.innerHTML = ``;
+        }
+
+    }
+
+    function registrar() {
+
+        var nome = document.getElementById('input_name').value;
+        var email = document.getElementById('input_email').value;
+        var confSenha = document.getElementById('input_confSenha').value;
+        var senha = document.getElementById('input_senha').value;
+
+        if (nome == '' || email == '' || confSenha == '' || senha == '') {
+            alert('Campos preenchidos incorretamente.')
+        }
+
+        else if (nome.trim().split(" ").length < 2) {
+            alert('Por favor, insira seu nome completo.');
+        }
+
+        else {
+
+            alert('Cadastro realizado com sucesso!');
+            window.location.href = 'login.html';
+        }
+    }
+
+</script>

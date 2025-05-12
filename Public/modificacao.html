@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCavallino | Personalização</title>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="menu-icon" onclick="abrirMenu()">
+            ☰
+        </div>
+
+
+        <div class="logo-centro">
+            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
+        </div>
+
+
+        <div class="frase-direita">
+            <p>Vamos personalizar sua Ferrari!</p>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <nav class="menu-lateral" id="menuLateral">
+        <ul>
+            <li><a href="#">Modelos</a></li>
+            <li><a href="#">Garagem</a></li>
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="area-personalizacao">
+
+        <!-- Carrossel de imagens -->
+        <section class="carrossel-carro">
+            <div class="slides">
+                <img src="/Front-end/imagens/personalizar1.jpg" alt="Imagem 1 do carro">
+                <img src="/Front-end/imagens/personalizar2.jpg" alt="Imagem 2 do carro">
+                <img src="/Front-end/imagens/personalizar3.jpg" alt="Imagem 3 do carro">
+                <!-- Use JavaScript para criar o carrossel real -->
+            </div>
+
+            <!-- Botão Salvar -->
+            <div class="botao-salvar">
+                <button>Salvar</button>
+            </div>
+        </section>
+
+        <!-- Opções de Personalização -->
+        <section class="painel-opcoes">
+            <div class="opcao">
+                <h2>Cores:</h2>
+                <div class="itens-opcao">
+                    <button class="vermelha"></button>
+                    <button class="preta"></button>
+                    <button class="branca"></button>
+                </div>
+            </div>
+
+            <div class="opcao">
+                <h2>Rodas:</h2>
+                <div class="itens-opcao">
+                    <img src="" alt="Roda 1">
+                    <img src="" alt="Roda 2">
+                    <img src="" alt="Roda 3">
+                </div>
+            </div>
+
+            <div class="opcao">
+                <h2>Adesivos:</h2>
+                <div class="itens-opcao">
+                    <img src="" alt="Adesivo 1">
+                    <img src="" alt="Adesivo 2">
+                    <img src="" alt="Adesivo 3">
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
+<script>
+
+    function abrirMenu() {
+        const menu = document.getElementById("menuLateral");
+        menu.classList.toggle("aberto");
+    }
+    
+</script>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="menu-icon" onclick="abrirMenu()">
+            ☰
+        </div>
+
+
+        <div class="logo-centro">
+            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
+        </div>
+
+
+        <div class="frase-direita">
+            <p>Vamos personalizar sua Ferrari!</p>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <nav class="menu-lateral" id="menuLateral">
+        <ul>
+            <li><a href="#">Modelos</a></li>
+            <li><a href="#">Garagem</a></li>
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo-dashboard">
+
+        <!-- KPIs -->
+        <section class="kpis">
+            <div class="kpi">
+                <h3>Ferraris Personalizadas</h3>
+                <p id="qtd-personalizadas">0</p>
+            </div>
+
+            <div class="kpi">
+                <h3>Modelos Restantes</h3>
+                <p id="qtd-restantes">0</p>
+            </div>
+
+            <div class="kpi">
+                <h3>Total de Customizações</h3>
+                <p id="qtd-total">0</p>
+            </div>
+        </section>
+
+        <!-- Email do usuário -->
+        <section class="usuario-logado">
+            <p>Usuário logado: <span id="email-usuario">usuario@email.com</span></p>
+        </section>
+
+        <!-- GRÁFICOS -->
+        <section class="graficos">
+
+            <!-- Linha do tempo -->
+            <div class="grafico-linha">
+                <h4>Linha do tempo de modificações</h4>
+                <canvas id="graficoLinha"></canvas>
+            </div>
+
+            <!-- Comparativo de cores e rodas -->
+            <div class="grafico-barras">
+                <h4>Cores e Rodas mais usadas</h4>
+                <canvas id="graficoBarras"></canvas>
+            </div>
+
+            <!-- Porcentagem de conclusão -->
+            <div class="grafico-pizza">
+                <h4>Progresso de personalização</h4>
+                <canvas id="graficoPizza"></canvas>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
+
+<script>
+
+    function abrirMenu() {
+        const menu = document.getElementById("menuLateral");
+        menu.classList.toggle("aberto");
+    }
+
+    
+
+</script>

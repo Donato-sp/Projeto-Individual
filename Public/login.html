@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/Front-end/style_login.css">
+</head>
+
+<body>
+
+    <main class='container'>
+
+        <video class="video" autoplay muted loop>
+            <source src="seu-video.mp4" type="video/mp4">
+        </video>
+
+        <form id='form-login' onsubmit='logar(event)'>
+            <div class='campo'>
+                <p>E-mail:</p>
+                <input type='email' id='input_email' placeholder='exemplo@exemplo.com' required>
+            </div>
+
+            <div class='campo'>
+                <p>Senha:</p>
+                <input type='password' id='input_senha' placeholder='******' required>
+            </div>
+
+            <div id='msg' class='mensagem'></div>
+            <button class='botao' onclick='logar()'>Login</button>
+        </form>
+
+        <p class='link-cadastro'>Ainda não é um piloto? <a href="cadastro.html">Cadastre-se</a></p>
+
+    </main>
+
+</body>
+
+</html>
+
+<script>
+
+    function logar() {
+        event.preventDefault();
+
+        var email = document.getElementById("input_email").value;
+        var senha = document.getElementById("input_senha").value;
+        var msg = document.getElementById("msg");
+        var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!regexEmail.test(email)) {
+            msg.innerHTML = `<span style="color: red;">E-mail inválido.</span>`;
+            return;
+        }
+
+        if (senha.length < 8) {
+            msg.innerHTML = `<span style="color: red;">A senha deve ter pelo menos 8 caracteres.</span>`;
+            return;
+        }
+
+        if (email === "usuario@exemplo.com" && senha === "senha123") {
+            alert('Login realizado com sucesso'); // Trocar quando conectar a api
+
+            setTimeout(function () {
+                window.location.href = ''; // Colocar link da página
+            }, 1000);
+        }
+
+        else {
+            msg.innerHTML = `<span style="color: red;">E-mail ou senha incorretos.</span>`;
+        }
+    }
+
+</script>

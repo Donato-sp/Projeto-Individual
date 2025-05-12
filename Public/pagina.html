@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCavallino | Modelos</title>
+</head>
+
+<body>
+
+    <!-- TOPO -->
+    <header class="topo">
+        <!-- Menu -->
+        <div class="menu-icon" onclick="abrirMenu()">
+            ☰
+        </div>
+
+        <!-- Logo -->
+        <div class="logo-centro">
+            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
+        </div>
+
+        <!-- Saudação -->
+        <div class="saudacao">
+            <p>Olá, <span id="nome-usuario">Usuário</span></p>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <nav class="menu-lateral" id="menuLateral">
+        <ul>
+            <li><a href="#">Modelos</a></li>
+            <li><a href="#">Garagem</a></li>
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo">
+        <h1 class="titulo-modelos">Selecione o modelo da sua Ferrari</h1>
+
+        <!-- CARDS -->
+        <div class="cards-container">
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari1.jpg" alt="Ferrari F40">
+                <h3>Ferrari F40</h3>
+            </div>
+
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari2.jpg" alt="Ferrari LaFerrari">
+                <h3>LaFerrari</h3>
+            </div>
+
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari3.jpg" alt="Ferrari Enzo">
+                <h3>Ferrari Enzo</h3>
+            </div>
+
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari4.jpg" alt="Ferrari 812 Superfast">
+                <h3>812 Superfast</h3>
+            </div>
+
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari5.jpg" alt="Ferrari SF90">
+                <h3>SF90 Stradale</h3>
+            </div>
+
+
+            <div class="card-modelo">
+                <img src="/Front-end/imagens/ferrari6.jpg" alt="Ferrari Portofino">
+                <h3>Portofino</h3>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
+
+<script>
+
+    function abrirMenu() {
+        const menu = document.getElementById("menuLateral");
+        menu.classList.toggle("aberto");
+    }
+
+</script>

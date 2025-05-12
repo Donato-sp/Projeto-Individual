@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="menu-icon" onclick="abrirMenu()">
+            ☰
+        </div>
+
+
+        <div class="logo-centro">
+            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
+        </div>
+
+
+        <div class="frase-direita">
+            <p>Vamos personalizar sua Ferrari!</p>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <nav class="menu-lateral" id="menuLateral">
+        <ul>
+            <li><a href="#">Modelos</a></li>
+            <li><a href="#">Garagem</a></li>
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main class="area-garagem">
+        <h2 class="titulo-garagem">Seus Modelos Personalizados</h2>
+
+        <section class="carrossel-garagem">
+            <div class="carro-personalizado">
+                <img src="/Front-end/imagens/perso1.png" alt="Carro 1 personalizado">
+                <p>F8 Spider Vermelha</p>
+            </div>
+
+            <div class="carro-personalizado">
+                <img src="/Front-end/imagens/perso2.png" alt="Carro 2 personalizado">
+                <p>488 GTB com Adesivo</p>
+            </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function abrirMenu() {
+        const menu = document.getElementById("menuLateral");
+        menu.classList.toggle("aberto");
+    }
+
+    
+    
+</script>
