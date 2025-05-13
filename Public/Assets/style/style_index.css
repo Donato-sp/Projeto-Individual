@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 0 5%;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-right: 2.8%;
+}
+
+.logo img {
+  height: 15rem;
+}
+
+.menu-list .nav-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-list .nav-list li a {
+  font-weight: 300;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.menu-list .nav-list li a:hover {
+  color: #830000;
+}
+
+.nav-button button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.nav-button button a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-button button:hover {
+  background-color: rgba(120, 3, 3, 0.648);
+  transition: background-color 0.3s;
+}
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 5rem;
+}
+
+.home-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+
+}
+
+.home-content {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+  z-index: 2;
+  letter-spacing: 2px;
+
+}
+
+.home-button a {
+  display: inline-block;
+  padding: 0.4rem 1.7rem;
+  font-size: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+  border: 1px solid white;
+}
+
+.home-button a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.curiosidades {
+  background-color: rgb(236, 236, 236);
+  padding: 6rem 5% 4rem;
+  color: black;
+}
+
+.curiosidades-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 3%;
+  gap: 8rem;
+}
+
+.carro-imagem img {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.curiosidade-info a {
+  font-size: 2.1rem;
+  color: #830000;
+  font-weight: 530;
+}
+
+.carro-info a {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #830000;
+  line-height: 80px;
+}
+
+.carro-info p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 25px;
+}
+
+.carro-info small {
+  font-style: italic;
+  color: black;
+}
+
+.iconic {
+  background-image: url('../img/ICONIC.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.iconic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.iconic-content {
+  z-index: 1;
+  color: white;
+}
+
+.iconic-content a {
+  font-size: 5rem;
+  letter-spacing: 0.8rem;
+}
+
+.iconic p {
+  font-size: 1.4rem;
+  font-weight: 50;
+  max-width: 100%;
+  line-height: 3rem;
+}
+
+.sobre {
+  padding: 5rem 2rem;
+  background-color: rgb(236, 236, 236);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sobre-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 7.2%;
+  margin-right: 6%;
+  width: 100%;
+  gap: 5rem;
+}
+
+.sobre-texto {
+  flex: 1.5;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(104, 4, 4, 0.467);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(104, 4, 4, 0.467);
+}
+
+.sobre-texto a {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #830000;
+}
+
+.sobre-texto p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: black;
+}
+
+.sobre-imagem {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+}
+
+.sobre-imagem img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(104, 4, 4, 0.467);
+  border: 1px solid rgba(104, 4, 4, 0.467);
+}
+
+.footer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #830000;
+  z-index: 0;
+}
+
+.footer-logo{
+  height: 15rem;
+}
+
+.footer-links {
+  text-decoration: none;
+  font-size: 1rem;
+}
