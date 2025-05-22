@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #fff;
+    color: #000;
+    margin-bottom: 2rem;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.logo-centro img {
+    height: 3rem;
+}
+
+#toggle {
+    display: block;
+    width: 28px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+#toggle span,
+#toggle span:before,
+#toggle span:after {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+#toggle span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#toggle span:before {
+    content: '';
+    top: -10px;
+}
+
+#toggle span:after {
+    content: '';
+    top: 10px;
+}
+
+.on span {
+    background-color: transparent;
+}
+
+.on span:before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.on span:after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.menu-container {
+    position: relative;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem 1.5rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-container.on #menu {
+    transform: translateX(0);
+}
+
+#menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+#menu li a:hover {
+    color: #830000;
+}
+
+.saudacao p {
+    font-size: 1.3rem;
+    color: #000;
+}
+
+.conteudo {
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titulo-modelos {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #830000;
+    text-align: center;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.card-modelo {
+    margin-top: 6.5%;
+    width: 380px;
+    height: auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.card-modelo img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    
+}
+
+.card-modelo p {
+    padding: 1rem 0;
+    text-align: center;
+    color: #830000;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    border: none;
+}
+
+.card-modelo:hover {
+    box-shadow: 0 8px 20px rgba(131, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
