@@ -5,33 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/Front-end/style_login.css">
+    <link rel="stylesheet" href="./Assets/style/style_login.css">
 </head>
 
 <body>
 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
     <main class='container'>
 
-        <video class="video" autoplay muted loop>
-            <source src="seu-video.mp4" type="video/mp4">
-        </video>
-
-        <form id='form-login' onsubmit='logar(event)'>
+        <section class='form-login'>
+            <h4>LOGIN</h4>
             <div class='campo'>
-                <p>E-mail:</p>
-                <input type='email' id='input_email' placeholder='exemplo@exemplo.com' required>
+                <p>E-MAIL:</p>
+                <input type='text' id='input_email' placeholder='exemplo@exemplo.com' required>
             </div>
 
             <div class='campo'>
-                <p>Senha:</p>
-                <input type='password' id='input_senha' placeholder='******' required>
+                <p>SENHA:</p>
+                <input type='password' id='input_senha' placeholder='********' required>
             </div>
 
             <div id='msg' class='mensagem'></div>
-            <button class='botao' onclick='logar()'>Login</button>
-        </form>
-
-        <p class='link-cadastro'>Ainda não é um piloto? <a href="cadastro.html">Cadastre-se</a></p>
+            <button class='botao' onclick='entrar()'>LOGIN</button>
+            <p class='link-cadastro'>AINDA NÃO É CADASTRADO?
+                <a href="cadastro.html">CADASTRE-SE</a>
+            </p>
+        </section>
 
     </main>
 
@@ -41,35 +41,92 @@
 
 <script>
 
-    function logar() {
-        event.preventDefault();
+    // function logar() {
+    //     event.preventDefault();
 
-        var email = document.getElementById("input_email").value;
-        var senha = document.getElementById("input_senha").value;
-        var msg = document.getElementById("msg");
-        var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     var email = document.getElementById("input_email").value;
+    //     var senha = document.getElementById("input_senha").value;
+    //     var msg = document.getElementById("msg");
+    //     var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!regexEmail.test(email)) {
-            msg.innerHTML = `<span style="color: red;">E-mail inválido.</span>`;
-            return;
+    //     if (!regexEmail.test(email)) {
+    //         msg.innerHTML = `<span style="color: red;">E-mail inválido.</span>`;
+    //         return;
+    //     }
+
+    //     if (senha.length < 8) {
+    //         msg.innerHTML = `<span style="color: red;">A senha deve ter pelo menos 8 caracteres.</span>`;
+    //         return;
+    //     }
+
+    //     if (email === "usuario@exemplo.com" && senha === "senha123") {
+    //         alert('Login realizado com sucesso'); // Trocar quando conectar a api
+
+    //         setTimeout(function () {
+    //             window.location.href = ''; // Colocar link da página
+    //         }, 1000);
+    //     }
+
+    //     else {
+    //         msg.innerHTML = `<span style="color: red;">E-mail ou senha incorretos.</span>`;
+    //     }
+    // }
+
+    function entrar() {
+        //  aguardar();
+
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            console.log("Mensagem de erro para todos os campos em branco");
+            return false;
         }
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
 
-        if (senha.length < 8) {
-            msg.innerHTML = `<span style="color: red;">A senha deve ter pelo menos 8 caracteres.</span>`;
-            return;
-        }
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
 
-        if (email === "usuario@exemplo.com" && senha === "senha123") {
-            alert('Login realizado com sucesso'); // Trocar quando conectar a api
+            if (resposta.ok) {
+                console.log(resposta);
 
-            setTimeout(function () {
-                window.location.href = ''; // Colocar link da página
-            }, 1000);
-        }
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
 
-        else {
-            msg.innerHTML = `<span style="color: red;">E-mail ou senha incorretos.</span>`;
-        }
+                    setTimeout(function () {
+                        window.location = "pagina.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                alert("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
     }
 
 </script>
