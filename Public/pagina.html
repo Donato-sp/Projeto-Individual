@@ -2,23 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyCavallino | Modelos</title>
+    <link rel="stylesheet" href="./Assets/style/style_pagina.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-
     <!-- TOPO -->
     <header class="topo">
         <!-- Menu -->
-        <div class="menu-icon" onclick="abrirMenu()">
-            ☰
+        <div class="menu-container">
+            <a href="#menu" id="toggle"><span></span></a>
+
+            <div id="menu">
+                <ul>
+                    <li><a href="./dashboard.html">MÉTRICAS</a></li>
+                    <li><a href="./garagem.html">GARAGEM</a></li>
+                    <li><a href="./index.html">SAIR</a></li>
+                </ul>
+            </div>
         </div>
 
         <!-- Logo -->
         <div class="logo-centro">
-            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
+            <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
         </div>
 
         <!-- Saudação -->
@@ -27,68 +36,69 @@
         </div>
     </header>
 
-    <!-- MENU LATERAL -->
-    <nav class="menu-lateral" id="menuLateral">
-        <ul>
-            <li><a href="#">Modelos</a></li>
-            <li><a href="#">Garagem</a></li>
-            <li><a href="#">Dashboard</a></li>
-        </ul>
-    </nav>
-
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
-        <h1 class="titulo-modelos">Selecione o modelo da sua Ferrari</h1>
+        <p id="titulo-modelos">SELECIONE O MODELO DA SUA FERRARI</p>
 
         <!-- CARDS -->
         <div class="cards-container">
-
             <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari1.jpg" alt="Ferrari F40">
-                <h3>Ferrari F40</h3>
+                <a onclick="escolherModelo('F40')">
+                <img src="./Assets/img/F40/Lateral esquerda/vermelha.webp" alt="Ferrari F40" />
+                </a>
+                <p>Ferrari F40</p>
             </div>
 
-
             <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari2.jpg" alt="Ferrari LaFerrari">
-                <h3>LaFerrari</h3>
+                <a onclick="escolherModelo('La Ferrari')">
+                <img src="./Assets/img/La Ferrari/lateral esquerda/vermelha.webp" alt="Ferrari LaFerrari" />
+                </a>
+                <p>LaFerrari</p>
             </div>
 
-
             <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari3.jpg" alt="Ferrari Enzo">
-                <h3>Ferrari Enzo</h3>
-            </div>
-
-
-            <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari4.jpg" alt="Ferrari 812 Superfast">
-                <h3>812 Superfast</h3>
-            </div>
-
-
-            <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari5.jpg" alt="Ferrari SF90">
-                <h3>SF90 Stradale</h3>
-            </div>
-
-
-            <div class="card-modelo">
-                <img src="/Front-end/imagens/ferrari6.jpg" alt="Ferrari Portofino">
-                <h3>Portofino</h3>
+                <a onclick="escolherModelo('458 italia')">
+                <img src="./Assets/img/458 italia/frente/frente.webp" alt="Ferrari italia" />
+                </a>
+                <p>Ferrari 458 Italia</p>
             </div>
         </div>
     </main>
-
 </body>
 
 </html>
 
 <script>
 
-    function abrirMenu() {
-        const menu = document.getElementById("menuLateral");
-        menu.classList.toggle("aberto");
-    }
+    // Lógica do menu
+    const toggle = document.getElementById('toggle');
+    const menuContainer = toggle.parentElement;
 
+    toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggle.classList.toggle('on');
+        menuContainer.classList.toggle('on');
+    });
+
+    document.addEventListener('click', function (e) {
+        const isClickInside = menuContainer.contains(e.target);
+        if (!isClickInside && menuContainer.classList.contains('on')) {
+            toggle.classList.remove('on');
+            menuContainer.classList.remove('on');
+        }
+    });
+
+    // Saudação
+    document.getElementById("nome-usuario").textContent = "Mah";
+
+    // Redirecionamento do caro para personalização
+
+    function escolherModelo(modelo) {
+  sessionStorage.setItem("modeloSelecionado", modelo);
+  window.location.href = "modificacao.html";
+}
+
+    //setlocation (if amarelo, if verde, if vermelho)
+    //tabela
+    //onclick 
 </script>
