@@ -5,47 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="/Front-end/style_cadastro.css">
+    <link rel="stylesheet" href="./Assets/style/style_cadastro.css">
 </head>
 
-<main class="container">
+<body>
 
-    <video class="video" autoplay muted loop>
-        <source src="seu-video.mp4" type="video/mp4">
-    </video>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <form class="form-cadastro" onsubmit="registrar(); return false;">
+    <main class="container">
 
-        <div class="campo">
-            <p>Nome completo:</p>
-            <input type="text" id="input_name" placeholder="Digite aqui..." class="input-text">
-        </div>
+        <section class="form-cadastro">
 
-        <div class="campo">
-            <p>E-mail:</p>
-            <input type="text" id="input_email" placeholder="exemplo@exemplo.com" class="input-text"
-                oninput="validarEmail()">
-            <div id="msg_email" class="mensagem"></div>
-        </div>
+            <h4>CADASTRO</h4>
 
-        <div class="campo">
-            <p>Senha:</p>
-            <input type="password" id="input_senha" placeholder="******" class="input-text" oninput="verificarSenha()">
-            <div id="msg_senha" class="mensagem"></div>
-        </div>
+            <div class="campo">
+                <p>NOME:</p>
+                <input type="text" id="input_name" placeholder="Digite aqui..." class="input-text">
+            </div>
 
-        <div class="campo">
-            <p>Confirmar senha:</p>
-            <input type="password" id="input_confSenha" placeholder="******" class="input-text" oninput="senhaConf()">
-            <div id="msg_confSenha" class="mensagem"></div>
-        </div>
+            <div class="campo">
+                <p>E-MAIL:</p>
+                <input type="text" id="input_email" placeholder="exemplo@exemplo.com" class="input-text"
+                    oninput="validarEmail()">
+                <div id="msg_email" class="mensagem"></div>
+            </div>
 
-            <button type="submit" class="botao">Cadastrar</button>
+            <div class="campo">
+                <p>SENHA:</p>
+                <input type="password" id="input_senha" placeholder="******" class="input-text"
+                    oninput="verificarSenha()">
+                <div id="msg_senha" class="mensagem"></div>
+            </div>
 
-    </form>
+            <div class="campo">
+                <p>CONFIRMAR SENHA:</p>
+                <input type="password" id="input_confSenha" placeholder="******" class="input-text"
+                    oninput="senhaConf()">
+                <div id="msg_confSenha" class="mensagem"></div>
+            </div>
 
-    <p class="link-login">Já é um piloto? <a href="login.html">Fazer login</a></p>
-</main>
+            <button class="botao" onclick="cadastrar()">CADASTRAR</button>
+            <div id="msg"></div>
+            <p class="link-login">JÁ É CADASTRADO?
+                <a href="login.html">FAZER LOGIN</a>
+            </p>
+        </section>
+        <div id="mensagem_erro"></div>
+
+    </main>
 
 </body>
 
@@ -55,7 +62,7 @@
 <script>
 
     function verificarSenha() {
-        var senha = document.getElementById('nput_senha').value;
+        var senha = document.getElementById('input_senha').value;
         var num = '0123456789';
         var carEsp = '!@#$%&*().';
         var verificar_caracter_esp = 0;
@@ -125,7 +132,6 @@
 
     function validarEmail() {
         var email = document.getElementById('input_email').value;
-
         var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!regex.test(email)) {
@@ -136,26 +142,87 @@
 
     }
 
-    function registrar() {
+    // Array para armazenar empresas cadastradas para validação de código de ativação 
+    // let listaEmpresasCadastradas = [];
 
-        var nome = document.getElementById('input_name').value;
-        var email = document.getElementById('input_email').value;
-        var confSenha = document.getElementById('input_confSenha').value;
-        var senha = document.getElementById('input_senha').value;
+    function cadastrar() {
+        //  aguardar();
 
-        if (nome == '' || email == '' || confSenha == '' || senha == '') {
-            alert('Campos preenchidos incorretamente.')
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = input_name.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+        var confirmacaoSenhaVar = input_confSenha.value;
+
+        // Verificando se há algum campo em branco
+        if (
+            nomeVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == ""
+        ) {
+            //     cardErro.style.display = "block";
+            //     mensagem_erro.innerHTML =
+            //       "(Mensagem de erro para todos os campos em branco)";
+
+            // //    finalizarAguardar();
+            // //    return false;
+        } else {
+            //     setInterval(sumirMensagem, 5000);
         }
 
-        else if (nome.trim().split(" ").length < 2) {
-            alert('Por favor, insira seu nome completo.');
-        }
+        // // Verificando se o código de ativação é de alguma empresa cadastrada
+        // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+        //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+        //     console.log("Código de ativação válido.");
+        //     break;
+        //   } else {
+        //     cardErro.style.display = "block";
+        //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        //     finalizarAguardar();
+        //   }
+        // }
 
-        else {
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-            alert('Cadastro realizado com sucesso!');
-            window.location.href = 'login.html';
-        }
+                if (resposta.ok) {
+                    console.log("Cadastro realizado com sucesso! Redirecionando...");
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+            })
+            .catch (function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        //  finalizarAguardar();
+    });
+
+    return false;
+
+        // function sumirMensagem() {
+        //     cardErro.style.display = "none";
+        // }
     }
-
 </script>

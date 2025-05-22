@@ -5,35 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./Assets/style/style_dashboard.css">
 </head>
 
 <body>
 
-    <header class="topo">
+    <!-- TOPO -->
+        <header class="topo">
+            <!-- Menu -->
+            <div class="menu-container">
+                <a href="#menu" id="toggle"><span></span></a>
 
-        <div class="menu-icon" onclick="abrirMenu()">
-            ☰
-        </div>
+                <div id="menu">
+                    <ul>
+                        <li><a href="./dashboard.html">MÉTRICAS</a></li>
+                        <li><a href="./garagem.html">GARAGEM</a></li>
+                        <li><a href="./pagina.html">MODELOS</a></li>
+                        <li><a href="./index.html">SAIR</a></li>
+                    </ul>
+                </div>
+            </div>
 
+          
+            <div class="logo-centro">
+                <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
+            </div>
 
-        <div class="logo-centro">
-            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
-        </div>
-
-
-        <div class="frase-direita">
-            <p>Vamos personalizar sua Ferrari!</p>
-        </div>
-    </header>
-
-    <!-- MENU LATERAL -->
-    <nav class="menu-lateral" id="menuLateral">
-        <ul>
-            <li><a href="#">Modelos</a></li>
-            <li><a href="#">Garagem</a></li>
-            <li><a href="#">Dashboard</a></li>
-        </ul>
-    </nav>
+          
+            <div class="saudacao">
+                <p>Olá, <span id="nome-usuario">Usuário</span></p>
+            </div>
+        </header>
 
     <!-- CONTEÚDO -->
     <main class="conteudo-dashboard">
@@ -70,7 +72,7 @@
                 <canvas id="graficoLinha"></canvas>
             </div>
 
-            <!-- Comparativo de cores e rodas -->
+            <!-- Comparativo de cores -->
             <div class="grafico-barras">
                 <h4>Cores e Rodas mais usadas</h4>
                 <canvas id="graficoBarras"></canvas>
@@ -92,11 +94,23 @@
 
 <script>
 
-    function abrirMenu() {
-        const menu = document.getElementById("menuLateral");
-        menu.classList.toggle("aberto");
-    }
+        // menu
+    const toggle = document.getElementById('toggle');
+    const menuContainer = toggle.parentElement;
 
+    toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggle.classList.toggle('on');
+        menuContainer.classList.toggle('on');
+    });
+
+    document.addEventListener('click', function (e) {
+        const isClickInside = menuContainer.contains(e.target);
+        if (!isClickInside && menuContainer.classList.contains('on')) {
+            toggle.classList.remove('on');
+            menuContainer.classList.remove('on');
+        }
+    });
     
 
 </script>
