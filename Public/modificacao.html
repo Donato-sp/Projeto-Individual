@@ -1,97 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyCavallino | Personalização</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./Assets/style/style_modificacao.css" />
 </head>
 
 <body>
 
-    <header class="topo">
+    <body>
+        <!-- TOPO -->
+        <header class="topo">
+            <!-- Menu -->
+            <div class="menu-container">
+                <a href="#menu" id="toggle"><span></span></a>
 
-        <div class="menu-icon" onclick="abrirMenu()">
-            ☰
-        </div>
+                <div id="menu">
+                    <ul>
+                        <li><a href="./dashboard.html">MÉTRICAS</a></li>
+                        <li><a href="./garagem.html">GARAGEM</a></li>
+                        <li><a href="./pagina.html">MODELOS</a></li>
+                        <li><a href="./index.html">SAIR</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="logo-centro">
+                <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
+            </div>
 
-        <div class="logo-centro">
-            <img src="/Front-end/imagens/logo.png" alt="Logo MyCavallino" />
-        </div>
-
+          
+            <div class="saudacao">
+                <p>Olá, <span id="nome-usuario">Usuário</span></p>
+            </div>
+        </header>
 
         <div class="frase-direita">
-            <p>Vamos personalizar sua Ferrari!</p>
+            <p>VAMOS PERSONALIZAR SUA FERRARI!</p>
         </div>
-    </header>
 
-    <!-- MENU LATERAL -->
-    <nav class="menu-lateral" id="menuLateral">
-        <ul>
-            <li><a href="#">Modelos</a></li>
-            <li><a href="#">Garagem</a></li>
-            <li><a href="#">Dashboard</a></li>
-        </ul>
-    </nav>
+        <main class="area-personalizacao">
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="area-personalizacao">
-
-        <!-- Carrossel de imagens -->
-        <section class="carrossel-carro">
-            <div class="slides">
-                <img src="/Front-end/imagens/personalizar1.jpg" alt="Imagem 1 do carro">
-                <img src="/Front-end/imagens/personalizar2.jpg" alt="Imagem 2 do carro">
-                <img src="/Front-end/imagens/personalizar3.jpg" alt="Imagem 3 do carro">
-                <!-- Use JavaScript para criar o carrossel real -->
-            </div>
-
-            <!-- Botão Salvar -->
-            <div class="botao-salvar">
-                <button>Salvar</button>
-            </div>
-        </section>
-
-        <!-- Opções de Personalização -->
-        <section class="painel-opcoes">
-            <div class="opcao">
-                <h2>Cores:</h2>
-                <div class="itens-opcao">
-                    <button class="vermelha"></button>
-                    <button class="preta"></button>
-                    <button class="branca"></button>
+            <!-- Carrossel -->
+            <section class="carrossel-carro">
+                <div class="carrossel">
+                    <img id="carro-imagem" src="" alt="Imagem do carro" width="400">
+                    <div class="cores">
+                        <button onclick="selecionarCor('cinza')">Cinza</button>
+                        <button onclick="selecionarCor('preto')">Preto</button>
+                        <button onclick="selecionarCor('azul')">Azul</button>
+                        <button onclick="selecionarCor('verde')">Verde</button>
+                        <button onclick="selecionarCor('rosa')">Rosa</button>
+                        <button onclick="selecionarCor('laranja')">Laranja</button>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="opcao">
-                <h2>Rodas:</h2>
-                <div class="itens-opcao">
-                    <img src="" alt="Roda 1">
-                    <img src="" alt="Roda 2">
-                    <img src="" alt="Roda 3">
-                </div>
-            </div>
+            <section>
+                <button onclick="salvarNaGaragem()">Postar na garagem</button>
+            </section>
 
-            <div class="opcao">
-                <h2>Adesivos:</h2>
-                <div class="itens-opcao">
-                    <img src="" alt="Adesivo 1">
-                    <img src="" alt="Adesivo 2">
-                    <img src="" alt="Adesivo 3">
-                </div>
-            </div>
-        </section>
+        </main>
 
-    </main>
-</body>
+    </body>
 
 </html>
+
 <script>
 
-    function abrirMenu() {
-        const menu = document.getElementById("menuLateral");
-        menu.classList.toggle("aberto");
+    // menu
+    const toggle = document.getElementById('toggle');
+    const menuContainer = toggle.parentElement;
+
+    toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggle.classList.toggle('on');
+        menuContainer.classList.toggle('on');
+    });
+
+    document.addEventListener('click', function (e) {
+        const isClickInside = menuContainer.contains(e.target);
+        if (!isClickInside && menuContainer.classList.contains('on')) {
+            toggle.classList.remove('on');
+            menuContainer.classList.remove('on');
+        }
+    });
+
+
+    // seleciona modelo
+    let modelo = sessionStorage.getItem("modeloSelecionado");
+    let corSelecionada = "cinza"; 
+
+    // personalizaçõ
+    window.onload = () => {
+        document.getElementById("titulo-carro").innerText = `Personalize sua Ferrari ${modelo.toUpperCase()}`;
+        atualizarImagem();
+    };
+
+    function atualizarImagem() {
+        const img = document.getElementById("carro-imagem");
+        img.src = `./Assets/img/${modelo}/${corSelecionada}.jpg`;
     }
-    
+
+    function selecionarCor(cor) {
+        corSelecionada = cor;
+        atualizarImagem();
+    }
+
+    function salvarNaGaragem() {
+        const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
+
+        const carro = {
+            modelo,
+            cor: corSelecionada,
+            data: new Date().toISOString()
+        };
+
+        garagem.push(carro);
+        localStorage.setItem("minhaGaragem", JSON.stringify(garagem));
+
+        alert("Carro salvo na garagem!");
+        window.location.href = "garagem.html";
+    }
 </script>
