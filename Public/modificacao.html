@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyCavallino | Personalização</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./Assets/style/style_modificacao.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./Assets/style/style_modificacao.css" />
 </head>
@@ -23,7 +28,7 @@
                         <li><a href="./dashboard.html">MÉTRICAS</a></li>
                         <li><a href="./garagem.html">GARAGEM</a></li>
                         <li><a href="./pagina.html">MODELOS</a></li>
-                        <li><a href="./index.html">SAIR</a></li>
+                        <li><a onClick="sessionStorage.clear()" href="./index.html">SAIR</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,16 +36,21 @@
             <div class="logo-centro">
                 <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
             </div>
+            <div class="logo-centro">
+                <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
+            </div>
 
-          
+
             <div class="saudacao">
                 <p>Olá, <span id="nome-usuario">Usuário</span></p>
             </div>
         </header>
 
         <div class="frase-direita">
-            <p>VAMOS PERSONALIZAR SUA FERRARI!</p>
+            <p id="titulo-carro"></p>
         </div>
+
+        <main class="area-personalizacao">
 
         <main class="area-personalizacao">
 
@@ -49,12 +59,12 @@
                 <div class="carrossel">
                     <img id="carro-imagem" src="" alt="Imagem do carro" width="400">
                     <div class="cores">
-                        <button onclick="selecionarCor('cinza')">Cinza</button>
-                        <button onclick="selecionarCor('preto')">Preto</button>
-                        <button onclick="selecionarCor('azul')">Azul</button>
-                        <button onclick="selecionarCor('verde')">Verde</button>
-                        <button onclick="selecionarCor('rosa')">Rosa</button>
-                        <button onclick="selecionarCor('laranja')">Laranja</button>
+                        <button onclick="atualizarImagem('cinza')">Cinza</button>
+                        <button onclick="atualizarImagem('preto')">Preto</button>
+                        <button onclick="atualizarImagem('azul')">Azul</button>
+                        <button onclick="atualizarImagem('verde')">Verde</button>
+                        <button onclick="atualizarImagem('rosa')">Rosa</button>
+                        <button onclick="atualizarImagem('laranja')">Laranja</button>
                     </div>
                 </div>
             </section>
@@ -62,12 +72,19 @@
             <section>
                 <button onclick="salvarNaGaragem()">Postar na garagem</button>
             </section>
+            <section>
+                <button onclick="salvarNaGaragem()">Postar na garagem</button>
+            </section>
 
+        </main>
+
+    </body>
         </main>
 
     </body>
 
 </html>
+
 
 <script>
 
@@ -89,40 +106,87 @@
         }
     });
 
+    document.getElementById("nome-usuario").textContent = `${sessionStorage.NOME_USUARIO}`;
 
-    // seleciona modelo
-    let modelo = sessionStorage.getItem("modeloSelecionado");
-    let corSelecionada = "cinza"; 
+    let urlParams = new URLSearchParams(window.location.search);
+    let carroId = urlParams.get('carro_id');
+    let modelo = urlParams.get('modelo');
+    let posicao = 'frente'
+    let corSelecionada = 'vermelha';
 
     // personalizaçõ
     window.onload = () => {
         document.getElementById("titulo-carro").innerText = `Personalize sua Ferrari ${modelo.toUpperCase()}`;
-        atualizarImagem();
+        atualizarImagem(corSelecionada);
     };
 
-    function atualizarImagem() {
+    function atualizarImagem(cor) {
+
         const img = document.getElementById("carro-imagem");
-        img.src = `./Assets/img/${modelo}/${corSelecionada}.jpg`;
+        corSelecionada = cor;
+        img.src = `./Assets/img/${modelo}/${posicao}/${corSelecionada}.jpg`;
     }
 
-    function selecionarCor(cor) {
-        corSelecionada = cor;
-        atualizarImagem();
-    }
+
+    // function salvarNaGaragem() {
+    //     const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
+
+    //     const carro = {
+    //         modelo,
+    //         cor: corSelecionada,
+    //         data: new Date().toISOString()
+    //     };
+
+    //     garagem.push(carro);
+    //     localStorage.setItem("minhaGaragem", JSON.stringify(garagem));
+
+    //     alert("Carro salvo na garagem!");
+    //     window.location.href = "garagem.html";
+    // }
 
     function salvarNaGaragem() {
-        const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
 
-        const carro = {
-            modelo,
-            cor: corSelecionada,
-            data: new Date().toISOString()
+        var personalizacao = {
+            usuario_id: sessionStorage.getItem('ID_USUARIO'),
+            carro_id: carroId,
+            cor: corSelecionada
         };
 
-        garagem.push(carro);
-        localStorage.setItem("minhaGaragem", JSON.stringify(garagem));
 
-        alert("Carro salvo na garagem!");
-        window.location.href = "garagem.html";
+        fetch("/personalizacao/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(personalizacao),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log("personalizacao realizado com sucesso! Redirecionando...");
+                    setTimeout(() => {
+                        alert('sucesso');
+                        window.location.href = 'garagem.html';
+                    }, 2000);
+
+                    // limparFormulario();
+                    // finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o personalizacao!";
+                    alert('erro');
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                alert(`#ERRO: ${resposta}`);
+                //  finalizarAguardar();
+            });
+
+        return false;
+
+        // function sumirMensagem() {
+        //     cardErro.style.display = "none";
+        // }
     }
 </script>

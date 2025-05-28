@@ -6,36 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./Assets/style/style_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
     <!-- TOPO -->
-        <header class="topo">
-            <!-- Menu -->
-            <div class="menu-container">
-                <a href="#menu" id="toggle"><span></span></a>
+    <header class="topo">
+        <!-- Menu -->
+        <div class="menu-container">
+            <a href="#menu" id="toggle"><span></span></a>
 
-                <div id="menu">
-                    <ul>
-                        <li><a href="./dashboard.html">MÉTRICAS</a></li>
-                        <li><a href="./garagem.html">GARAGEM</a></li>
-                        <li><a href="./pagina.html">MODELOS</a></li>
-                        <li><a href="./index.html">SAIR</a></li>
-                    </ul>
-                </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="./dashboard.html">MÉTRICAS</a></li>
+                    <li><a href="./garagem.html">GARAGEM</a></li>
+                    <li><a href="./pagina.html">MODELOS</a></li>
+                    <li><a onClick="sessionStorage.clear()" href="./index.html">SAIR</a></li>
+                </ul>
             </div>
+        </div>
 
-          
-            <div class="logo-centro">
-                <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
-            </div>
 
-          
-            <div class="saudacao">
-                <p>Olá, <span id="nome-usuario">Usuário</span></p>
-            </div>
-        </header>
+        <div class="logo-centro">
+            <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
+        </div>
+
+
+        <div class="saudacao">
+            <p>Olá, <span id="nome-usuario">Usuário</span></p>
+        </div>
+    </header>
 
     <!-- CONTEÚDO -->
     <main class="conteudo-dashboard">
@@ -63,25 +64,23 @@
             <p>Usuário logado: <span id="email-usuario">usuario@email.com</span></p>
         </section>
 
-        <!-- GRÁFICOS -->
         <section class="graficos">
 
-            <!-- Linha do tempo -->
             <div class="grafico-linha">
                 <h4>Linha do tempo de modificações</h4>
-                <canvas id="graficoLinha"></canvas>
+                <canvas id="grafico-linha"></canvas>
             </div>
 
             <!-- Comparativo de cores -->
-            <div class="grafico-barras">
-                <h4>Cores e Rodas mais usadas</h4>
-                <canvas id="graficoBarras"></canvas>
+            <div class="grafico-barra" style="width:340px;">
+                <h4>Cores mais usadas</h4>
+                <canvas id="grafico-barra"></canvas>
             </div>
 
             <!-- Porcentagem de conclusão -->
-            <div class="grafico-pizza">
+            <div class="grafico-rosca">
                 <h4>Progresso de personalização</h4>
-                <canvas id="graficoPizza"></canvas>
+                <canvas id="grafico-rosca"></canvas>
             </div>
 
         </section>
@@ -94,7 +93,7 @@
 
 <script>
 
-        // menu
+    // menu
     const toggle = document.getElementById('toggle');
     const menuContainer = toggle.parentElement;
 
@@ -111,6 +110,145 @@
             menuContainer.classList.remove('on');
         }
     });
-    
+
+    document.getElementById("nome-usuario").textContent = `${sessionStorage.NOME_USUARIO}`;
+
+    getData();
+
+    function getData() {
+
+        let cores = [];
+
+        fetch("/personalizacao/listar", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((personalizacoes) => {
+
+                    montaGraficoBarra(personalizacoes);
+                    montaGraficoLinha(personalizacoes);
+                    montaGraficoRosca(personalizacoes);
+
+
+                })
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+    }
+    //Barra
+    function montaGraficoBarra(personalizacoes) {
+        const agrupadoPorCor = {};
+
+        personalizacoes.forEach((p) => {
+            const cor = p.cor;
+
+            if (agrupadoPorCor[cor]) {
+                agrupadoPorCor[cor].quantidade += 1;
+            } else {
+                agrupadoPorCor[cor] = {
+                    quantidade: 1,
+                    corHexa: p.corHexa
+                };
+            }
+
+        });
+
+        let data = {
+            labels: Object.keys(agrupadoPorCor),
+            datasets: [{
+                label: 'Cores mais utilizadas',
+                data: Object.values(agrupadoPorCor).map(c => c.quantidade),
+                backgroundColor: Object.values(agrupadoPorCor).map(c => c.corHexa),
+                // borderColor: 'rgba(150, 100, 255, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration options for the chart
+        let options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        let ctx = document.getElementById('grafico-barra')
+            .getContext('2d');
+
+        let graficoBarra = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+
+    }
+
+    //Linha
+
+    function montaGraficoLinha(personalizacoes) {
+        const agrupadoPorData = {};
+        const hoje = new Date();
+        const dias = [];
+
+        for (var i = 6; i >= 0; i--) {
+            const data = new Date();
+            data.setDate(hoje.getDate() - i);
+            const formato = data.toLocaleDateString('pt-BR');
+            dias.push(formato);
+            agrupadoPorData[formato] = 0;
+        }
+
+        personalizacoes.forEach(p => {
+
+            const data = new Date(p.dataPersonalizacao);
+            const formato = data.toLocaleDateString('pt-BR');
+            if (agrupadoPorData[formato] !== undefined) {
+                agrupadoPorData[formato]++;
+            }
+        });
+
+        const data = {
+            labels: dias,
+            datasets: [{
+                label: 'Personalizações por Dia',
+                data: dias.map(d => agrupadoPorData[d]),
+                borderColor: '#FF0000',
+                backgroundColor: '#FFAAAA',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 1
+            }]
+        };
+
+        const options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const ctx = document.getElementById('grafico-linha').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+
+    }
+
+    //Rosca
+
+    function montaGraficoRosca(personalizacoes) {
+
+        personalizacoes.forEach((p) => {
+
+
+        });
+    }
 
 </script>

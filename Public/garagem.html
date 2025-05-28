@@ -6,11 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garagem | MyCavallino</title>
     <link rel="stylesheet" href="Assets/style/style_garagem.css">
+    <title>Garagem | MyCavallino</title>
+    <link rel="stylesheet" href="Assets/style/style_garagem.css">
 </head>
 
 <body>
     <!-- TOPO -->
+    <!-- TOPO -->
     <header class="topo">
+        <!-- Menu -->
+        <div class="menu-container">
+            <a href="#menu" id="toggle"><span></span></a>
+
+            <div id="menu">
+                <ul>
+                    <li><a href="./dashboard.html">MÉTRICAS</a></li>
+                    <li><a href="./garagem.html">GARAGEM</a></li>
+                    <li><a href="./pagina.html">MODELOS</a></li>
+                    <li><a href="./index.html">SAIR</a></li>
+                </ul>
+            </div>
         <!-- Menu -->
         <div class="menu-container">
             <a href="#menu" id="toggle"><span></span></a>
@@ -26,15 +41,25 @@
         </div>
 
         <!-- Logo -->
+        <!-- Logo -->
         <div class="logo-centro">
+            <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
             <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
         </div>
 
         <!-- Saudação -->
         <div class="saudacao">
             <p>Olá, <span id="nome-usuario">Usuário</span></p>
+        <!-- Saudação -->
+        <div class="saudacao">
+            <p>Olá, <span id="nome-usuario">Usuário</span></p>
         </div>
     </header>
+    <main class="conteudo">
+        <section class="conteudo-salvo">
+            <div id="garagem-container"></div>
+        </section>
+    </main>
     <main class="conteudo">
         <section class="conteudo-salvo">
             <div id="garagem-container"></div>
@@ -46,6 +71,9 @@
 </html>
 
 <script>
+
+    let listaPersonalizacoes = [];
+
 
     // Lógica do menu
     const toggle = document.getElementById('toggle');
@@ -65,31 +93,53 @@
         }
     });
 
+    document.getElementById("nome-usuario").textContent = `${sessionStorage.NOME_USUARIO}`;
+
     // upload dos carros salvos
     window.onload = () => {
-        const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
-        const container = document.getElementById("garagem-container");
+        listar();
+        // const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
+
         let modelo = sessionStorage.getItem("modeloSelecionado");
         let corSelecionada = "laranja";
-        
-        if (garagem.length === 0) {
-            container.innerHTML = "<p>Nenhum carro salvo ainda.</p>";
-            return;
-        }
 
-        let i = 0;
-        garagem.forEach(carro => {
-            
-            const div = document.createElement("div");
-            div.innerHTML = `   
-      <h3>${carro.modelo.toUpperCase()}</h3>
-        <img src="./Assets/img/${garagem[i].modelo}/${garagem[i].cor}.jpg">
-      <p>Cor: ${garagem[i].cor}</p>
-      <hr/>
-    `;
-            container.appendChild(div);
-            i++;
-        });
+
+
+
     };
+
+    function listar() {
+
+        const container = document.getElementById("garagem-container");
+
+        fetch("/personalizacao/listar", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((personalizacoes) => {
+
+                    if (personalizacoes.length === 0) {
+                        container.innerHTML = "<p>Nenhum carro salvo ainda.</p>";
+                        return;
+                    }
+
+                    personalizacoes.forEach((personalizacao) => {
+
+                        const div = document.createElement("div");
+                        div.innerHTML = `<h3>${personalizacao.modelo.toUpperCase()}</h3>
+                                                    <img src="./Assets/img/${personalizacao.modelo}/frente/${personalizacao.cor}.jpg" width="120">
+                                                <p>Cor: ${personalizacao.cor}</p>
+                                                <hr/>
+                                                `;
+                        container.appendChild(div);
+
+
+                    });
+                });
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+    }
 
 </script>

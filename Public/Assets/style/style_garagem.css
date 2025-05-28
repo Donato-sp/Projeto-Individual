@@ -110,3 +110,8 @@
 #menu li a:hover {
     color: #830000;
 }
+
+.saudacao p {
+    font-size: 1.3rem;
+    color: #000;
+}
