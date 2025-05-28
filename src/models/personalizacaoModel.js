@@ -17,12 +17,12 @@ var instrucaoSql = `SELECT id, usuario_id, carro_id,  case
 		                                                  end as modelo, 
                             cor,
                             case 
-                              when cor = 'cinza' then '#808080' -- Gray
-                              when cor = 'preto' then '#000000' -- Black
-                              when cor = 'azul' then '#0000FF' -- Blue
-                              when cor = 'verde' then '#008000' -- Green
-                              when cor = 'rosa' then '#FFC0CB' -- Pink
-                              when cor = 'laranja' then '#FFA500' -- Orange
+                              when cor = 'cinza' then '#515151'
+                              when cor = 'preto' then '#000000'
+                              when cor = 'azul' then '#0000FF'
+                              when cor = 'verde' then '#4a9700' 
+                              when cor = 'rosa' then '#f40179' 
+                              when cor = 'laranja' then '#ff6600'
                             end AS corHexa,
                             dataPersonalizacao 
                       FROM personalizacao WHERE 1=1`;
@@ -44,10 +44,7 @@ var instrucaoSql = `SELECT id, usuario_id, carro_id,  case
   return database.executar(instrucaoSql);
 }
 
-
-
 function cadastrar(usuario_id, carro_id, cor) {
-  debugger;
   var instrucaoSql = `INSERT INTO personalizacao (usuario_id, carro_id, cor) VALUES (${usuario_id}, ${carro_id}, '${cor}')`;
 
   return database.executar(instrucaoSql);

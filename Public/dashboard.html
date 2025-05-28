@@ -72,7 +72,7 @@
             </div>
 
             <!-- Comparativo de cores -->
-            <div class="grafico-barra" style="width:340px;" >
+            <div class="grafico-barra" style="width:340px;">
                 <h4>Cores mais usadas</h4>
                 <canvas id="grafico-barra"></canvas>
             </div>
@@ -115,135 +115,6 @@
 
     getData();
 
-
-
-    // new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Silo A', 'Silo B', 'Silo C', 'Silo D'],
-    //         datasets: [
-    //             {
-    //                 label: 'Dia em estoque',
-    //                 data: [10, 30, 120, 100],
-    //                 backgroundColor: ['#008000', '#9B2226', '#005F73', '#EE9B00'],
-    //                 barThickness: 60
-    //             }
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 display: false
-    //             },
-    //             title: {
-    //                 display: true,
-    //                 text: 'Silos e dias em armazenagem',
-    //                 color: '#222222',
-    //                 font: {
-    //                     size: 20,
-    //                 }
-    //             },
-    //             tooltip: {
-    //                 backgroundColor: '#333333',
-    //                 titleColor: '#ffffff',
-    //                 bodyColor: '#ffffff'
-    //             }
-    //         },
-    //         scales: {
-    //             x: {
-    //                 ticks: {
-    //                     color: '#111111',
-    //                 },
-    //                 grid: {
-    //                     display: false
-    //                 }
-    //             },
-    //             y: {
-    //                 ticks: {
-    //                     color: '#111111'
-    //                 },
-    //                 grid: {
-    //                     display: false
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // const lugar = document.getElementById('grafico-linha');
-
-    // new Chart(lugar, {
-    //     type: 'line',
-    //     data: {
-    //         labels: [
-    //             '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
-    //             '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
-    //             '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
-    //         ], datasets: [{
-    //             label: 'Silo A',
-    //             data: [
-    //                 1.10, 1.20, 0.80, 0.50, 1.0, 1.10, 0.90, 0.30, 0.40, 0.80, 0.40, 0.30, 0.20, 0.60,
-    //             ], borderWidth: 1,
-    //             backgroundColor: '#008000',
-    //             borderColor: '#008000'
-    //         },
-
-    //         {
-    //             label: 'Silo B',
-    //             data: [
-    //                 1.90, 2.20, 2.90, 3.10, 3.15, 2.90, 1.90, 2.30, 2.40, 1.80, 2.40, 2.30, 1.20, 2.50,
-    //             ], borderWidth: 1,
-    //             backgroundColor: '#9B2226',
-    //             borderColor: '#9B2226'
-    //         },
-
-    //         {
-    //             label: 'Silo C',
-    //             data: [
-    //                 0.50, 2.10, 4.70, 3.80, 3.10, 0.80, 1.20, 2.00, 4.20, 3.60, 0.90, 2.40, 1.00, 1.10,
-    //             ], borderWidth: 1,
-    //             backgroundColor: '#005F73',
-    //             borderColor: '#005F73'
-    //         },
-
-    //         {
-    //             label: 'Silo D',
-    //             data: [
-    //                 4.80, 2.30, 1.10, 0.30, 2.90, 3.50, 1.70, 4.90, 2.50, 1.40, 0.60, 3.10, 2.20, 2.30,
-    //             ], borderWidth: 1,
-    //             backgroundColor: '#EE9B00',
-    //             borderColor: '#EE9B00'
-    //         },
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 labels: {
-    //                     font: {
-    //                         size: 12
-    //                     }
-    //                 }
-    //             },
-    //             title: {
-    //                 display: true,
-    //                 text: 'Média diária dos gases nos silos (por Hora)',
-    //                 color: '#222222',
-    //                 font: {
-    //                     size: 20,
-    //                 }
-    //             },
-    //             tooltip: {
-    //                 backgroundColor: '#333333',
-    //                 titleColor: '#ffffff',
-    //                 bodyColor: '#ffffff'
-    //             }
-    //         }
-    //     }
-    // });
-
     function getData() {
 
         let cores = [];
@@ -266,7 +137,6 @@
             });
 
     }
-
 
     //Barra
 
@@ -292,7 +162,7 @@
             datasets: [{
                 label: 'Cores mais utilizadas',
                 data: Object.values(agrupadoPorCor).map(c => c.quantidade),
-                 backgroundColor: Object.values(agrupadoPorCor).map(c => c.corHexa),
+                backgroundColor: Object.values(agrupadoPorCor).map(c => c.corHexa),
                 // borderColor: 'rgba(150, 100, 255, 1)',
                 borderWidth: 1
             }]
@@ -307,8 +177,7 @@
             }
         };
 
-        let ctx = document.getElementById('grafico-barra')
-            .getContext('2d');
+        let ctx = document.getElementById('grafico-barra').getContext('2d');
 
         let graficoBarra = new Chart(ctx, {
             type: 'bar',
@@ -322,24 +191,55 @@
 
     function montaGraficoLinha(personalizacoes) {
         const agrupadoPorData = {};
+        const hoje = new Date();
+        const dias = [];
+
+        for (var i = 6; i >= 0; i--) {
+            const data = new Date();
+            data.setDate(hoje.getDate() - i);
+            const formato = data.toLocaleDateString('pt-BR');
+            dias.push(formato);
+            agrupadoPorData[formato] = 0;
+        }
 
         personalizacoes.forEach((p) => {
-            // var data = p.dataPersonalizacao;
-            // new Date(data).toLocaleDateString()
+            const data = new Date(p.dataPersonalizacao);
+            const formato = data.toLocaleDateString('pt-BR')
 
-            // if (agrupadoPorData[data]) {
-            //     agrupadoPorData[data] += 1;
-            // } else {
-            //     agrupadoPorData[data] = 1;
-            // }
-
+            if (agrupadoPorData[formato] !== undefined) {
+                agrupadoPorData[formato]++;
+            }
         });
 
-        // const dataP = document.getElementById('grafico-linha');
-        // new Chart(dataP, {
-        //     type: 'line',
-        //     data: data,
-        // });
+        const data = {
+            labels: dias,
+            datasets: [{
+                label: 'Personalizações por dia',
+                data: dias.map(d => agrupadoPorData[d]),
+                borderColor: '#830000',
+                backgroundColor: '#c30010',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 1
+            }]
+        };
+
+        const options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        let ctx = document.getElementById('grafico-linha').getContext('2d');
+
+        let graficoBarra = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+
     }
 
     //Rosca
