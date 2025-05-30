@@ -8,6 +8,7 @@ function listar(req, res) {
 
   personalizacaoModel.listar(usuarioId, carroId, cor).then((resultado) => {
     res.status(200).json(resultado);
+    
   });
 }
 
