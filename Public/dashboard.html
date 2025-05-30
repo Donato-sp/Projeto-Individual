@@ -44,24 +44,19 @@
         <!-- KPIs -->
         <section class="kpis">
             <div class="kpi">
-                <h3>Ferraris Personalizadas</h3>
-                <p id="qtd-personalizadas">0</p>
+                <h3>Ferrari mais personalizada</h3>
+                <p id="qtd_ferrari">0</p>
             </div>
 
             <div class="kpi">
-                <h3>Modelos Restantes</h3>
-                <p id="qtd-restantes">0</p>
+                <h3>Usuário com mais personalizações</h3>
+                <p id="qtd_usuario">0</p>
             </div>
 
             <div class="kpi">
-                <h3>Total de Customizações</h3>
-                <p id="qtd-total">0</p>
+                <h3>Total de ferraris personalizadas</h3>
+                <p id="qtd_total">0</p>
             </div>
-        </section>
-
-        <!-- Email do usuário -->
-        <section class="usuario-logado">
-            <p>Usuário logado: <span id="email-usuario">usuario@email.com</span></p>
         </section>
 
         <section class="graficos">
@@ -75,12 +70,6 @@
             <div class="grafico-barra" style="width:340px;">
                 <h4>Cores mais usadas</h4>
                 <canvas id="grafico-barra"></canvas>
-            </div>
-
-            <!-- Porcentagem de conclusão -->
-            <div class="grafico-rosca">
-                <h4>Progresso de personalização</h4>
-                <canvas id="grafico-rosca"></canvas>
             </div>
 
         </section>
@@ -127,7 +116,7 @@
 
                     montaGraficoBarra(personalizacoes);
                     montaGraficoLinha(personalizacoes);
-                    montaGraficoRosca(personalizacoes);
+                    montarKpis(personalizacoes);
 
 
                 })
@@ -242,14 +231,82 @@
 
     }
 
-    //Rosca
+    function montarKpis(personalizacoes) {
+        const total = personalizacoes.length;
+        const contPorFerrari = [
 
-    function montaGraficoRosca(personalizacoes) {
+            {
+                nome: 'F40',
+                qtd: 0
+            },
+
+
+            {
+                nome:'La Ferrari',
+                qtd: 0
+            },
+
+
+            {
+                nome:'458 italia',
+                qtd: 0
+            }
+
+        ];
+        const contPorUsuario = [
+            
+        ];
+
 
         personalizacoes.forEach((p) => {
 
+            contPorFerrari.forEach(obj =>{
+                console.log(p.modelo, obj.nome)
+                if(p.modelo == obj.nome){
+                    obj.qtd ++;
+                }
 
-        });
+            })
+            let usuario = {
+                id: p.usuario_id, qtd: 0, nome: p.nomeCompleto
+            }
+
+            var existe = false;
+
+            contPorUsuario.forEach(obj => {
+                if(obj.id == usuario.id){
+                    obj.qtd++;
+                    existe = true;
+                }
+            })
+
+            if(!existe){
+                contPorUsuario.push(usuario)
+            }
+           
+        }); 
+        let modeloMax = contPorFerrari[0];
+        let usuarioTop = contPorUsuario[0];
+        
+        for(var i =0; i < contPorFerrari.length; i++){
+            if(contPorFerrari[i].qtd > modeloMax.qtd){
+                modeloMax = contPorFerrari[i];
+            }
+        }
+
+        for(var i = 0; i < contPorUsuario.length; i++){
+            if(contPorUsuario[i].qtd > usuarioTop.qtd){
+                usuarioTop = contPorUsuario[i];
+            }
+        }
+
+        document.getElementById('qtd_ferrari').textContent = `${modeloMax.nome}`;
+        document.getElementById('qtd_usuario').textContent = `Usuario ${usuarioTop.nome}`
+        document.getElementById('qtd_total').textContent = personalizacoes.length
+        console.log(contPorFerrari)
+        console.log(contPorUsuario)
+        console.log(modeloMax)
+        
     }
 
 </script>
