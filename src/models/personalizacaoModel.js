@@ -8,8 +8,6 @@ function buscarPorId(id) {
 
 function listar(usuario_id, carro_id, cor) {
 
-  // var instrucaoSql = `SELECT id, usuario_id, carro_id, cor, dataPersonalizacao FROM personalizacao WHERE 1=1`;
-
 var instrucaoSql = `SELECT personalizacao.id, usuario_id, usuario.nomeCompleto, carro_id,  case 
                                                         when carro_id = 1 then "F40"
                                                         when carro_id = 2 then "La Ferrari"
@@ -43,7 +41,6 @@ var instrucaoSql = `SELECT personalizacao.id, usuario_id, usuario.nomeCompleto, 
     instrucaoSql += ` AND cor =  "${cor}"`;
   }
 
-  
 
   return database.executar(instrucaoSql);
 }

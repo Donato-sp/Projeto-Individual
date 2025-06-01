@@ -30,7 +30,7 @@ function cadastrar(req, res) {
     if (resultado.length > 0) {
       res
         .status(401)
-        .json({ mensagem: `Esta personalização já existe` });
+        .json({ mensagem: `Você já fez essa personalização antes` });
     } else {
       personalizacaoModel.cadastrar(usuario_id, carro_id, cor).then((resultado) => {
         res.status(201).json(resultado);
