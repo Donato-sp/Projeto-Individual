@@ -7,22 +7,19 @@
 body {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
-  background: url('../img/FERRARI.jpg') no-repeat center center fixed;
+  background: url('../img/ICONIC.png') no-repeat center center fixed;
   background-size: cover;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-/* Container geral */
 .container {
   display: flex;
   width: 100%;
   height: 100vh;
 }
 
-
-/* Formulário de cadastro */
 .form-cadastro {
   width: 35%;
   background: rgba(0, 0, 0, 0.8);
@@ -66,14 +63,13 @@ body {
   transition: 0.5;
 }
 
-/* Títulos dos campos */
+
 .campo p {
   color: #fff;
   margin-bottom: 0.5rem;
   font-weight: 300;
 }
 
-/* Inputs estilizados */
 input {
   width: 100%;
   padding: 0.75rem;
@@ -90,12 +86,10 @@ input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Espaço entre os campos */
 .campo {
   margin-bottom: 2rem;
 }
 
-/* Botão com efeito LED */
 .botao {
   width: 50%;
   align-self: center;
@@ -117,7 +111,7 @@ input::placeholder {
   box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
 }
 
-/* Link para login */
+
 .link-login {
   margin-top: 3rem;
   color: white;
@@ -136,7 +130,6 @@ input::placeholder {
   text-decoration: underline;
 }
 
-/* Mensagem personalizada */
 .mensagem {
   margin-top: -0.5rem;
   margin-bottom: 1rem;
