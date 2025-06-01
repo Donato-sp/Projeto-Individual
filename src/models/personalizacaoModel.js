@@ -21,10 +21,11 @@ var instrucaoSql = `SELECT personalizacao.id, usuario_id, usuario.nomeCompleto, 
                               when cor = 'verde' then '#4a9700' 
                               when cor = 'rosa' then '#f40179' 
                               when cor = 'laranja' then '#ff6600'
+                              when cor = 'vermelha' then '#b80000'
                             end AS corHexa,
                             dataPersonalizacao 
                       FROM personalizacao
-                      JOIN usuario on usuario.id_usuario = personalizacao.usuario_id
+                      LEFT JOIN usuario on usuario.id_usuario = personalizacao.usuario_id
                       WHERE 1=1`;
 
   if(carro_id){
