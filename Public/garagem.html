@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <!-- TOPO -->
+
     <header class="topo">
-        <!-- Menu -->
+
         <div class="menu-container">
             <a href="#menu" id="toggle"><span></span></a>
 
@@ -25,18 +25,19 @@
             </div>
         </div>
 
-        <!-- Logo -->
+
         <div class="logo-centro">
             <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
         </div>
 
-        <!-- Saudação -->
+
         <div class="saudacao">
             <p>Olá, <span id="nome-usuario">Usuário</span></p>
         </div>
     </header>
     <main class="conteudo">
         <p>Bem vindo a garagem!</p>
+        <a>Aqui você pode visualizar o seu cavallino e a criação da comunidade</a>
         <section class="conteudo-salvo">
             <div id="garagem-container"></div>
         </section>
@@ -51,7 +52,7 @@
     let listaPersonalizacoes = [];
 
 
-    // Lógica do menu
+
     const toggle = document.getElementById('toggle');
     const menuContainer = toggle.parentElement;
 
@@ -71,7 +72,6 @@
 
     document.getElementById("nome-usuario").textContent = `${sessionStorage.NOME_USUARIO}`;
 
-    // upload dos carros salvos
     window.onload = () => {
         listar();
 
@@ -99,9 +99,9 @@
 
                         const div = document.createElement("div");
                         div.innerHTML = `<h3>${personalizacao.modelo.toUpperCase()}</h3>
-                                                    <img src="./Assets/img/${personalizacao.modelo}/frente/${personalizacao.cor}.jpg" width="120">
+                                                <img src="./Assets/img/${personalizacao.modelo}/frente/${personalizacao.cor}.jpg" width="120">
                                                 <p>Cor: ${personalizacao.cor}</p>
-                                                <hr/>
+                                                <a>${personalizacao.nomeCompleto}</a>
                                                 `;
                         container.appendChild(div);
 

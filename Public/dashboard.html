@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Métricas | Mycavallino</title>
     <link rel="stylesheet" href="./Assets/style/style_dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <!-- TOPO -->
+
     <header class="topo">
-        <!-- Menu -->
+
         <div class="menu-container">
             <a href="#menu" id="toggle"><span></span></a>
 
@@ -38,10 +38,9 @@
         </div>
     </header>
 
-    <!-- CONTEÚDO -->
+
     <main class="conteudo-dashboard">
 
-        <!-- KPIs -->
         <section class="kpis">
             <div class="kpi">
                 <h3>Ferrari mais personalizada</h3>
@@ -62,13 +61,12 @@
         <section class="graficos">
 
             <div class="grafico-linha">
-                <h4>Linha do tempo de modificações</h4>
+                <h4>Linha do tempo de personalizações</h4>
                 <canvas id="grafico-linha"></canvas>
             </div>
 
-            <!-- Comparativo de cores -->
             <div class="grafico-barra" style="width:340px;">
-                <h4>Cores mais usadas</h4>
+                <h4>Cores mais utilizadas pela comunidade</h4>
                 <canvas id="grafico-barra"></canvas>
             </div>
 
@@ -82,7 +80,6 @@
 
 <script>
 
-    // menu
     const toggle = document.getElementById('toggle');
     const menuContainer = toggle.parentElement;
 
@@ -152,12 +149,11 @@
                 label: 'Cores mais utilizadas',
                 data: Object.values(agrupadoPorCor).map(c => c.quantidade),
                 backgroundColor: Object.values(agrupadoPorCor).map(c => c.corHexa),
-                // borderColor: 'rgba(150, 100, 255, 1)',
                 borderWidth: 1
             }]
         };
 
-        // Configuration options for the chart
+
         let options = {
             scales: {
                 y: {
@@ -231,6 +227,8 @@
 
     }
 
+    // KPIs
+
     function montarKpis(personalizacoes) {
         const total = personalizacoes.length;
         const contPorFerrari = [
@@ -242,28 +240,28 @@
 
 
             {
-                nome:'La Ferrari',
+                nome: 'La Ferrari',
                 qtd: 0
             },
 
 
             {
-                nome:'458 italia',
+                nome: '458 italia',
                 qtd: 0
             }
 
         ];
         const contPorUsuario = [
-            
+
         ];
 
 
         personalizacoes.forEach((p) => {
 
-            contPorFerrari.forEach(obj =>{
+            contPorFerrari.forEach(obj => {
                 console.log(p.modelo, obj.nome)
-                if(p.modelo == obj.nome){
-                    obj.qtd ++;
+                if (p.modelo == obj.nome) {
+                    obj.qtd++;
                 }
 
             })
@@ -274,39 +272,39 @@
             var existe = false;
 
             contPorUsuario.forEach(obj => {
-                if(obj.id == usuario.id){
+                if (obj.id == usuario.id) {
                     obj.qtd++;
                     existe = true;
                 }
             })
 
-            if(!existe){
+            if (!existe) {
                 contPorUsuario.push(usuario)
             }
-           
-        }); 
+
+        });
         let modeloMax = contPorFerrari[0];
         let usuarioTop = contPorUsuario[0];
-        
-        for(var i =0; i < contPorFerrari.length; i++){
-            if(contPorFerrari[i].qtd > modeloMax.qtd){
+
+        for (var i = 0; i < contPorFerrari.length; i++) {
+            if (contPorFerrari[i].qtd > modeloMax.qtd) {
                 modeloMax = contPorFerrari[i];
             }
         }
 
-        for(var i = 0; i < contPorUsuario.length; i++){
-            if(contPorUsuario[i].qtd > usuarioTop.qtd){
+        for (var i = 0; i < contPorUsuario.length; i++) {
+            if (contPorUsuario[i].qtd > usuarioTop.qtd) {
                 usuarioTop = contPorUsuario[i];
             }
         }
 
         document.getElementById('qtd_ferrari').textContent = `${modeloMax.nome}`;
-        document.getElementById('qtd_usuario').textContent = `Usuario ${usuarioTop.nome}`
+        document.getElementById('qtd_usuario').textContent = `${usuarioTop.nome}`
         document.getElementById('qtd_total').textContent = personalizacoes.length
         console.log(contPorFerrari)
         console.log(contPorUsuario)
         console.log(modeloMax)
-        
+
     }
 
 </script>

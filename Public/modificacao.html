@@ -12,9 +12,9 @@
 <body>
 
     <body>
-        <!-- TOPO -->
+
         <header class="topo">
-            <!-- Menu -->
+
             <div class="menu-container">
                 <a href="#menu" id="toggle"><span></span></a>
 
@@ -44,13 +44,12 @@
 
         <main>
 
-            <!-- Carrossel -->
             <section class="carrossel-carro">
 
                 <div class="carrossel">
 
-                        <img id="carro-imagem" src="" alt="Imagem do carro" width="580">
-                    
+                    <img id="carro-imagem" src="" alt="Imagem do carro" width="580">
+
                     <div class="cores">
                         <p>ESCOLHA A COR:</p>
                         <button id="cinza" onclick="atualizarImagem('cinza')">Cinza</button>
@@ -64,7 +63,7 @@
                 </div>
 
                 <div class="botao-salvar">
-                <button onclick="salvarNaGaragem()">Guardar na garagem</button>
+                    <button onclick="salvarNaGaragem()">Guardar na garagem</button>
                 </div>
 
             </section>
@@ -77,7 +76,7 @@
 
 <script>
 
-    // menu
+
     const toggle = document.getElementById('toggle');
     const menuContainer = toggle.parentElement;
 
@@ -142,14 +141,13 @@
                     }, 2000);
 
                 } else {
-                    throw "Houve um erro ao tentar realizar o personalizacao!";
-                    alert('erro');
+                    resposta.json().then(json => alert(json.mensagem));
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
                 alert(`#ERRO: ${resposta}`);
-                
+
             });
 
         return false;

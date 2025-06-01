@@ -129,6 +129,12 @@
     font-size: 1.8rem;
 }
 
+.conteudo a {
+    margin-left: 7%;
+    color: #830000;
+    font-size: 1rem;
+}
+
 .conteudo-salvo {
     padding-left: 4%;
     padding-right: 4%;
@@ -176,6 +182,17 @@
     bottom: 8px;
     right: 10px;
     background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+#garagem-container>div a {
+    position: absolute;
+    bottom: 8px;
+    margin-left: 5px;
+    color: #830000;
     padding: 0.2rem 0.6rem;
     border-radius: 6px;
     font-size: 0.8rem;

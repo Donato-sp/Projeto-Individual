@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <!-- TOPO -->
+
     <header class="topo">
-        <!-- Menu -->
+
         <div class="menu-container">
             <a href="#menu" id="toggle"><span></span></a>
 
@@ -25,22 +25,18 @@
             </div>
         </div>
 
-        <!-- Logo -->
         <div class="logo-centro">
             <img src="./Assets/img/MyPagina(4).png" alt="Logo MyCavallino" />
         </div>
 
-        <!-- Saudação -->
         <div class="saudacao">
             <p>Olá, <span id="nome-usuario">Usuário</span></p>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
         <p id="titulo-modelos">SELECIONE O MODELO DA SUA FERRARI</p>
 
-        <!-- CARDS -->
         <div class="cards-container">
             <div class="card-modelo">
                 <a onclick="escolherModelo(1, 'F40')">
@@ -70,7 +66,6 @@
 
 <script>
 
-    // Lógica do menu
     const toggle = document.getElementById('toggle');
     const menuContainer = toggle.parentElement;
 
@@ -87,19 +82,12 @@
             menuContainer.classList.remove('on');
         }
     });
-    // Saudação
 
     document.getElementById("nome-usuario").textContent = `${sessionStorage.NOME_USUARIO}`;
 
-    // Redirecionamento do caro para personalização
-
     function escolherModelo(carro_id, modelo) {
-        // sessionStorage.setItem("modeloSelecionado", modelo);
+
         window.location = `modificacao.html?carro_id=${carro_id}&modelo=${modelo}`;
     }
 
-    //setlocation (if amarelo, if verde, if vermelho)
-    //tabela
-    //onclick
-    // jira serverce manegement 30 days free
 </script>
