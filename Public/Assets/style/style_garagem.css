@@ -115,3 +115,69 @@
     font-size: 1.3rem;
     color: #000;
 }
+
+#garagem-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.conteudo p {
+    margin-left: 7%;
+    color: #830000;
+    font-size: 1.8rem;
+}
+
+.conteudo-salvo {
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+#garagem-container>div {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 0.3s ease;
+}
+
+#garagem-container>div:hover {
+    transform: scale(1.03);
+}
+
+#garagem-container>div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+#garagem-container>div h3 {
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 1;
+    position: relative;
+}
+
+#garagem-container>div p {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    z-index: 1;
+}

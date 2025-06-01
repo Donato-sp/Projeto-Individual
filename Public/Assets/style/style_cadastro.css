@@ -21,6 +21,7 @@ body {
   height: 100vh;
 }
 
+
 /* Formulário de cadastro */
 .form-cadastro {
   width: 35%;
@@ -36,7 +37,6 @@ body {
   box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
 }
 
-/* Gradiente de transição entre cadastro e imagem */
 .form-cadastro::after {
   content: "";
   position: absolute;
@@ -53,6 +53,17 @@ body {
   margin-bottom: 3rem;
   font-weight: 600px;
   letter-spacing: 5px;
+}
+
+.form-cadastro a {
+  text-align: initial;
+  text-decoration: none;
+  color: #fff;
+}
+
+.form-cadastro a:hover {
+  color: #cc0000;
+  transition: 0.5;
 }
 
 /* Títulos dos campos */

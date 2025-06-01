@@ -44,6 +44,18 @@ body {
   letter-spacing: 5px;
 }
 
+.form-login a {
+  margin-bottom: 15%;
+  text-align: initial;
+  text-decoration: none;
+  color: #fff;
+}
+
+.form-login a:hover {
+  color: #cc0000;
+  transition: 0.5;
+}
+
 
 /* Gradiente de transição entre login e imagem */
 .form-login::after {

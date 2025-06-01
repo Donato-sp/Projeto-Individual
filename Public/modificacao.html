@@ -42,25 +42,31 @@
             <p id="titulo-carro"></p>
         </div>
 
-        <main class="area-personalizacao">
+        <main>
 
             <!-- Carrossel -->
             <section class="carrossel-carro">
-                <div class="carrossel">
-                    <img id="carro-imagem" src="" alt="Imagem do carro" width="400">
-                    <div class="cores">
-                        <button onclick="atualizarImagem('cinza')">Cinza</button>
-                        <button onclick="atualizarImagem('preto')">Preto</button>
-                        <button onclick="atualizarImagem('azul')">Azul</button>
-                        <button onclick="atualizarImagem('verde')">Verde</button>
-                        <button onclick="atualizarImagem('rosa')">Rosa</button>
-                        <button onclick="atualizarImagem('laranja')">Laranja</button>
-                    </div>
-                </div>
-            </section>
 
-            <section>
-                <button onclick="salvarNaGaragem()">Postar na garagem</button>
+                <div class="carrossel">
+
+                        <img id="carro-imagem" src="" alt="Imagem do carro" width="580">
+                    
+                    <div class="cores">
+                        <p>ESCOLHA A COR:</p>
+                        <button id="cinza" onclick="atualizarImagem('cinza')">Cinza</button>
+                        <button id="preto" onclick="atualizarImagem('preto')">Preto</button>
+                        <button id="azul" onclick="atualizarImagem('azul')">Azul</button>
+                        <button id="verde" onclick="atualizarImagem('verde')">Verde</button>
+                        <button id="rosa" onclick="atualizarImagem('rosa')">Rosa</button>
+                        <button id="laranja" onclick="atualizarImagem('laranja')">Laranja</button>
+                    </div>
+
+                </div>
+
+                <div class="botao-salvar">
+                <button onclick="salvarNaGaragem()">Guardar na garagem</button>
+                </div>
+
             </section>
 
         </main>
@@ -97,7 +103,6 @@
     let posicao = 'frente'
     let corSelecionada = 'vermelha';
 
-    // personalizaçõ
     window.onload = () => {
         document.getElementById("titulo-carro").innerText = `Personalize sua Ferrari ${modelo.toUpperCase()}`;
         atualizarImagem(corSelecionada);
@@ -109,23 +114,6 @@
         corSelecionada = cor;
         img.src = `./Assets/img/${modelo}/${posicao}/${corSelecionada}.jpg`;
     }
-
-
-    // function salvarNaGaragem() {
-    //     const garagem = JSON.parse(localStorage.getItem("minhaGaragem") || "[]");
-
-    //     const carro = {
-    //         modelo,
-    //         cor: corSelecionada,
-    //         data: new Date().toISOString()
-    //     };
-
-    //     garagem.push(carro);
-    //     localStorage.setItem("minhaGaragem", JSON.stringify(garagem));
-
-    //     alert("Carro salvo na garagem!");
-    //     window.location.href = "garagem.html";
-    // }
 
     function salvarNaGaragem() {
 
@@ -153,8 +141,6 @@
                         window.location.href = 'garagem.html';
                     }, 2000);
 
-                    // limparFormulario();
-                    // finalizarAguardar();
                 } else {
                     throw "Houve um erro ao tentar realizar o personalizacao!";
                     alert('erro');
@@ -163,13 +149,10 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
                 alert(`#ERRO: ${resposta}`);
-                //  finalizarAguardar();
+                
             });
 
         return false;
 
-        // function sumirMensagem() {
-        //     cardErro.style.display = "none";
-        // }
     }
 </script>
