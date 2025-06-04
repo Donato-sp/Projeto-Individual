@@ -42,6 +42,8 @@ var instrucaoSql = `SELECT personalizacao.id, usuario_id, usuario.nomeCompleto, 
     instrucaoSql += ` AND cor =  "${cor}"`;
   }
 
+  instrucaoSql += ` ORDER BY personalizacao.id DESC`
+
 
   return database.executar(instrucaoSql);
 }

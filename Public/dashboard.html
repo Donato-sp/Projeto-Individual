@@ -7,6 +7,7 @@
     <title>Métricas | Mycavallino</title>
     <link rel="stylesheet" href="./Assets/style/style_dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="./Assets/img/logoBack.png">
 </head>
 
 <body>
@@ -53,7 +54,7 @@
             </div>
 
             <div class="kpi">
-                <h3>Total de ferraris personalizadas</h3>
+                <h3>Total de modelos personalizados</h3>
                 <p id="qtd_total">0</p>
             </div>
         </section>
@@ -176,21 +177,30 @@
 
     function montaGraficoLinha(personalizacoes) {
         const agrupadoPorData = {};
-        const hoje = new Date();
+        const hoje = new Date(); // obj atual
         const dias = [];
 
         for (var i = 6; i >= 0; i--) {
             const data = new Date();
-            data.setDate(hoje.getDate() - i);
-            const formato = data.toLocaleDateString('pt-BR');
+            data.setDate(hoje.getDate() - i); // pra cada repetição do foreach ele cria uma data modificada retirando dias apartir do dia de hoje ex: primeira volta do for: i = 6, pega a data atual ex 03/06 e subtrai sete dias
+            
+            const formato = data.toLocaleDateString('pt-BR'); // transforma a data subtraida em um formato dd/mm/YYYY
             dias.push(formato);
-            agrupadoPorData[formato] = 0;
+            // resultado seria tipo dias = ["22/05/2025", "24/05/2025"]
+            agrupadoPorData[formato] = 0; 
+
+            // resultado da linha acima:
+            // agrupadoPorData = {
+            //    29/05/2025: 0,
+            //    30/05/2025: 0    
+            //    }
         }
 
         personalizacoes.forEach((p) => {
-            const data = new Date(p.dataPersonalizacao);
+            const data = new Date(p.dataPersonalizacao); // quando voce passa o timestamp do banco pra a função Date, ele transforma em uma data correspondente ao que esta no banco ex: 2025-06-02T21:56:43.000Z => 02/06/2025
             const formato = data.toLocaleDateString('pt-BR')
-
+            //
+            // em agrupadosPorData tem uma chave que vale 02/06/2025? se sim incrementa o valor nessa mesma chave, entao como no mapeamento acima vale zero na primeira vez que achar passa a valer 1 e assim consecutivamente
             if (agrupadoPorData[formato] !== undefined) {
                 agrupadoPorData[formato]++;
             }
@@ -251,22 +261,19 @@
             }
 
         ];
-        const contPorUsuario = [
-
-        ];
+        const contPorUsuario = [];
 
 
         personalizacoes.forEach((p) => {
 
             contPorFerrari.forEach(obj => {
-                console.log(p.modelo, obj.nome)
                 if (p.modelo == obj.nome) {
                     obj.qtd++;
                 }
-
             })
             let usuario = {
-                id: p.usuario_id, qtd: 0, nome: p.nomeCompleto
+                
+                id: p.usuario_id, qtd: 1, nome: p.nomeCompleto
             }
 
             var existe = false;
@@ -285,6 +292,7 @@
         });
         let modeloMax = contPorFerrari[0];
         let usuarioTop = contPorUsuario[0];
+        let totalPersonalizacoes = personalizacoes.length 
 
         for (var i = 0; i < contPorFerrari.length; i++) {
             if (contPorFerrari[i].qtd > modeloMax.qtd) {
@@ -298,12 +306,11 @@
             }
         }
 
-        document.getElementById('qtd_ferrari').textContent = `${modeloMax.nome}`;
+        var porcentagem = (modeloMax.qtd * 100) / totalPersonalizacoes;
+
+        document.getElementById('qtd_ferrari').innerHTML = `${porcentagem.toFixed(0)}% dos usuarios esolheram a ${modeloMax.nome}<br> para personalizar`;
         document.getElementById('qtd_usuario').textContent = `${usuarioTop.nome}`
-        document.getElementById('qtd_total').textContent = personalizacoes.length
-        console.log(contPorFerrari)
-        console.log(contPorUsuario)
-        console.log(modeloMax)
+        document.getElementById('qtd_total').textContent = totalPersonalizacoes;
 
     }
 

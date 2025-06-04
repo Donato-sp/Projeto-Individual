@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | MyCavallino</title>
     <link rel="stylesheet" href="./Assets/style/style_cadastro.css">
+    <link rel="icon" href="./Assets/img/logoBack.png">
 </head>
 
 <body>
@@ -27,8 +28,7 @@
 
             <div class="campo">
                 <p>E-MAIL:</p>
-                <input type="text" id="input_email" placeholder="exemplo@exemplo.com" class="input-text"
-                    oninput="validarEmail()">
+                <input type="text" id="input_email" placeholder="exemplo@exemplo.com" class="input-text">
                 <div id="msg_email" class="mensagem"></div>
             </div>
 
@@ -130,18 +130,6 @@
         }
 
         document.getElementById('msg').innerHTML = mensagem;
-    }
-
-    function validarEmail() {
-        var email = document.getElementById('input_email').value;
-        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!regex.test(email)) {
-            msg.innerHTML = `<span style="color: red;">E-mail inválido</span>`;
-        } else {
-            msg.innerHTML = ``;
-        }
-
     }
 
     function cadastrar() {

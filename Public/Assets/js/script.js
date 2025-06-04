@@ -44,5 +44,5 @@ function atualizarCarrossel() {
     document.getElementById('carro-curiosidade').textContent = ferrariAleatoria.curiosidade;
 }
 
-setInterval(atualizarCarrossel, 5000);
+setInterval(atualizarCarrossel, 4000);
 
